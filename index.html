@@ -1,155 +1,465 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Maria Gabriela Mendoza</title>
-  <style>
-    body { margin: 0; font-family: system-ui, -apple-system, sans-serif; }
-    .container { display: flex; max-width: 1200px; margin: auto; }
-    .sidebar {
-      width: 260px; padding: 32px;
-      border-right: 1px solid #e5e7eb;
-      position: sticky; top: 0; height: 100vh;
-    }
-    .sidebar img { width: 250px; border-radius: 0; }
-    .sidebar h1 { font-size: 22px; margin: 16px 0 4px; }
-    .sidebar a { display: block; margin: 8px 0; text-decoration: none; }
-    .content { padding: 40px; flex: 1; }
-    nav a { margin-right: 16px; }
-    section { margin-bottom: 64px; }
-    h2 { border-bottom: 1px solid #e5e7eb; padding-bottom: 6px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>María Gabriela Mendoza — UC Berkeley</title>
+<meta name="description" content="María Gabriela Mendoza, Ph.D. candidate in Mechanical Engineering at UC Berkeley. Multi-agent systems, decentralized coordination, humanitarian robotics.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal: #1F5F5B;        /* matches the accent color in your CV */
+    --teal-deep: #143E3B;
+    --teal-tint: #EAF1EF;
+    --amber: #B07A1E;
+    --paper: #FBFBF8;
+    --ink: #1D2422;
+    --ink-soft: #4C5854;
+    --line: #DCE3E0;
+    --maxw: 46rem;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation: none !important; transition: none !important; }
+  }
+
+  body {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: var(--ink);
+    background: var(--paper);
+  }
+
+  a { color: var(--teal); text-decoration: none; border-bottom: 1px solid var(--line); transition: border-color .15s ease, color .15s ease; }
+  a:hover { color: var(--teal-deep); border-bottom-color: var(--teal); }
+  a:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; border-radius: 2px; }
+
+  /* ---------- Top navigation ---------- */
+  .topnav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(251, 251, 248, 0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topnav-inner {
+    max-width: var(--maxw); margin: 0 auto; padding: 0.7rem 1.25rem;
+    display: flex; flex-wrap: wrap; gap: 0.25rem 1.1rem; align-items: baseline;
+  }
+  .topnav .brand {
+    font-family: "Space Grotesk", sans-serif; font-weight: 600;
+    color: var(--ink); border: none; margin-right: auto;
+  }
+  .topnav a:not(.brand) {
+    font-family: "IBM Plex Mono", monospace; font-size: 0.78rem;
+    color: var(--ink-soft); border: none; letter-spacing: 0.02em;
+  }
+  .topnav a:not(.brand):hover { color: var(--teal); }
+
+  /* ---------- Header / hero ---------- */
+  header.hero {
+    position: relative; overflow: hidden;
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(180deg, #F2F6F4 0%, var(--paper) 100%);
+  }
+  .hero-inner {
+    max-width: var(--maxw); margin: 0 auto;
+    padding: 3.5rem 1.25rem 2.75rem;
+    display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center;
+    position: relative; z-index: 1;
+  }
+  .hero h1 {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: clamp(2rem, 5vw, 2.9rem);
+    font-weight: 600; letter-spacing: -0.015em; line-height: 1.08;
+    color: var(--teal-deep);
+  }
+  .hero .role {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.84rem; color: var(--ink-soft);
+    margin-top: 0.8rem; line-height: 1.7;
+  }
+  .hero .links { margin-top: 1.1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .hero .links a {
+    font-family: "IBM Plex Mono", monospace; font-size: 0.76rem;
+    border: 1px solid var(--line); border-radius: 999px;
+    padding: 0.3rem 0.85rem; background: #fff; color: var(--teal-deep);
+  }
+  .hero .links a:hover { border-color: var(--teal); background: var(--teal-tint); }
+
+  .headshot {
+    width: 9.5rem; height: 9.5rem; border-radius: 50%;
+    object-fit: cover; border: 3px solid #fff;
+    box-shadow: 0 1px 0 var(--line), 0 8px 24px rgba(20, 62, 59, 0.12);
+  }
+
+  /* Signature: an ergodic coverage trace over a faint grid */
+  .coverage-trace {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    pointer-events: none; opacity: 0.5;
+  }
+  .coverage-trace path.trajectory {
+    stroke-dasharray: 2400; stroke-dashoffset: 2400;
+    animation: trace 3.2s ease-out 0.2s forwards;
+  }
+  @keyframes trace { to { stroke-dashoffset: 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    .coverage-trace path.trajectory { stroke-dashoffset: 0; }
+  }
+
+  /* ---------- Main ---------- */
+  main { max-width: var(--maxw); margin: 0 auto; padding: 0 1.25rem 4rem; }
+
+  section { padding-top: 3rem; }
+  .eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.74rem; font-weight: 500; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--amber);
+    display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1.1rem;
+  }
+  .eyebrow::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+  section p + p { margin-top: 0.9rem; }
+
+  /* News */
+  .news { list-style: none; }
+  .news li {
+    display: grid; grid-template-columns: 6.2rem 1fr; gap: 1rem;
+    padding: 0.65rem 0; border-bottom: 1px dashed var(--line);
+  }
+  .news time {
+    font-family: "IBM Plex Mono", monospace; font-size: 0.78rem;
+    color: var(--ink-soft); padding-top: 0.2rem;
+  }
+
+  /* Publications */
+  .pub { padding: 0.85rem 0 0.85rem 1rem; border-left: 2px solid var(--teal-tint); margin-bottom: 0.4rem; }
+  .pub:hover { border-left-color: var(--teal); }
+  .pub .title { font-weight: 600; }
+  .pub .authors { color: var(--ink-soft); font-size: 0.97rem; }
+  .pub .venue { font-size: 0.92rem; margin-top: 0.15rem; }
+  .pub .venue em { color: var(--teal-deep); }
+  .pub .tags { margin-top: 0.35rem; display: flex; gap: 0.4rem; flex-wrap: wrap; }
+  .tag {
+    font-family: "IBM Plex Mono", monospace; font-size: 0.68rem;
+    background: var(--teal-tint); color: var(--teal-deep);
+    border-radius: 3px; padding: 0.12rem 0.45rem; border: none;
+  }
+  a.tag:hover { background: var(--teal); color: #fff; }
+  .pub-note { font-size: 0.9rem; color: var(--ink-soft); margin-bottom: 1rem; }
+  h3.pub-group {
+    font-family: "Space Grotesk", sans-serif; font-size: 0.95rem; font-weight: 600;
+    color: var(--teal-deep); margin: 1.4rem 0 0.5rem;
+  }
+
+  /* Simple definition-style rows (teaching, talks, experience) */
+  .rows { list-style: none; }
+  .rows li {
+    display: grid; grid-template-columns: 6.2rem 1fr; gap: 1rem;
+    padding: 0.6rem 0; border-bottom: 1px dashed var(--line);
+  }
+  .rows .when { font-family: "IBM Plex Mono", monospace; font-size: 0.78rem; color: var(--ink-soft); padding-top: 0.2rem; }
+  .rows .what strong { font-weight: 600; }
+  .rows .what .sub { color: var(--ink-soft); font-size: 0.95rem; }
+
+  footer {
+    border-top: 1px solid var(--line);
+    font-family: "IBM Plex Mono", monospace; font-size: 0.74rem; color: var(--ink-soft);
+    max-width: var(--maxw); margin: 0 auto; padding: 1.5rem 1.25rem 2.5rem;
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;
+  }
+
+  @media (max-width: 600px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .headshot { width: 7rem; height: 7rem; }
+    .news li, .rows li { grid-template-columns: 1fr; gap: 0.15rem; }
+  }
+</style>
 </head>
 <body>
-<div class="container">
 
-  <aside class="sidebar">
-    <img src="ProfilePic2_cropped.jpg" alt="Profile photo">
-    <h1>Maria Gabriela Mendoza</h1>
-    <p>PhD Student • Multi-Agent Systems - design and control</p>
+<nav class="topnav" aria-label="Site">
+  <div class="topnav-inner">
+    <a class="brand" href="#top">M. G. Mendoza</a>
+    <a href="#about">About</a>
+    <a href="#research">Research</a>
+    <a href="#news">News</a>
+    <a href="#publications">Publications</a>
+    <a href="#talks">Talks</a>
+    <a href="#teaching">Teaching</a>
+    <a href="#projects">Projects</a>
+  </div>
+</nav>
 
-    <a href="Mendoza_Maria_CV_052026.pdf">CV</a>
-    <a href="https://github.com/mgmendoza">GitHub</a>
-    <a href="https://www.linkedin.com/in/maria-gabriela-mendoza/">LinkedIn</a>
-    <a href="https://scholar.google.com/citations?user=jHEiHecAAAAJ&hl=en">Google Scholar</a>
-    <a href="https://www2.eecs.berkeley.edu/Faculty/Homepages/sastry.html">Advisor: Prof. S. Shankar Sastry (UC Berkeley)</a>
-    <a href="https://solid.eecs.berkeley.edu/"> Lab's website</a>
-    <p >Contact: maria_mendoza (at) berkeley (dot) edu</p>
-  </aside>
+<header class="hero" id="top">
+  <!-- Signature: an ergodic exploration trace over a faint survey grid -->
+  <svg class="coverage-trace" viewBox="0 0 800 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1F5F5B" stroke-opacity="0.07" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="800" height="300" fill="url(#grid)"/>
+    <path class="trajectory" d="M -20 250 C 80 180, 60 90, 160 80 S 280 190, 360 170 S 420 40, 520 60 S 600 220, 700 200 S 780 90, 850 110"
+          fill="none" stroke="#1F5F5B" stroke-opacity="0.22" stroke-width="2"/>
+    <circle cx="160" cy="80" r="3.5" fill="#1F5F5B" fill-opacity="0.3"/>
+    <circle cx="360" cy="170" r="3.5" fill="#1F5F5B" fill-opacity="0.3"/>
+    <circle cx="520" cy="60" r="3.5" fill="#B07A1E" fill-opacity="0.5"/>
+    <circle cx="700" cy="200" r="3.5" fill="#1F5F5B" fill-opacity="0.3"/>
+  </svg>
 
-  <main class="content">
-    <nav>
-      <a href="#about">About</a>
-      <a href="#research">Research</a>
-       <a href="#news">News</a>
-      <a href="#publications">Publications</a>
-      <a href="#teaching">Teaching</a>
-      <a href="#experience">Experience</a>
-      <a href="#talks">Talks</a>
-      <a href="#projects">Ongoing Projects</a>
-    </nav>
+  <div class="hero-inner">
+    <div>
+      <h1>María Gabriela Mendoza</h1>
+      <p class="role">Ph.D. Candidate · Mechanical Engineering · UC Berkeley<br>
+      Multi-agent systems · Decentralized coordination · Humanitarian robotics</p>
+      <div class="links">
+        <a href="mailto:maria_mendoza@berkeley.edu">Email</a>
+        <a href="https://scholar.google.com/citations?user=jHEiHecAAAAJ&hl=en">Google Scholar</a>
+        <a href="https://github.com/mgmendoza">GitHub</a>
+        <a href="http://linkedin.com/in/maria-gabriela-mendoza">LinkedIn</a>
+        <a href="Mendoza_Maria_CV_062026.pdf">CV</a><!-- update path to your CV file -->
+      </div>
+    </div>
+    <!-- Replace src with your photo, or delete this <img> -->
+    <img class="headshot" src="ProfilePic2_cropped.jpg" alt="Portrait of María Gabriela Mendoza" onerror="this.style.display='none'">
+  </div>
+</header>
+
+<main>
 
   <section id="about">
-    <h2>About me</h2>
+    <div class="eyebrow">About</div>
     <p>
-      I am Maria Gabriela Mendoza, a Ph.D. student in Mechanical Engineering at UC Berkeley. I am fortunate to be advised by <a href="https://scholar.google.com/citations?hl=en&user=KgZxzjsAAAAJ&view_op=list_works&sortby=pubdate" target="_blank">
-  Prof. Shankar Sastry</a> and mentored by <a href="https://chinmaheshwari.github.io/chinmay.maheshwari/" target="_blank">
-  Prof. Chinmay Maheshwari</a> and Dr. Victoria Tuck (Postdoctoral Researcher at Upenn). 
+      I am a Ph.D. candidate in Mechanical Engineering at UC Berkeley, where I am fortunate to be advised by
+      <a href="https://scholar.google.com/citations?hl=en&user=KgZxzjsAAAAJ&view_op=list_works&sortby=pubdate">Prof. Shankar Sastry</a>
+      and mentored by <a href="https://chinmaheshwari.github.io/chinmay.maheshwari/">Prof. Chinmay Maheshwari</a>
+      and Dr. Victoria Tuck (postdoctoral researcher, UPenn).
     </p>
     <p>
-      My research focuses on the design and control of multi-agent systems operating in complex environments (highly uncertain and dynamic) environments with applications 
-      in Advanced Air Mobility, humanitarian robotics, and strategic coordination of robots.
+      My research focuses on the design and control of multi-agent systems operating in highly uncertain and
+      dynamic environments, with applications in Advanced Air Mobility, humanitarian robotics, and strategic
+      coordination of robots.
     </p>
     <p>
-      Prior to UC Berkeley, I worked for five years as a Research Scientist at Lockheed Martin, contributing to projects ranging from hypersonic aerothermal design earlier in my career 
-      to AI and robotics research in later years, often in collaboration with academic partners. I am also deeply committed to mentoring and inclusive engineering 
-      education, and previously served as engineering faculty at Cañada College.
+      Before Berkeley, I spent five years as a Research Scientist at Lockheed Martin, contributing to projects
+      ranging from hypersonic aerothermal design early in my career to AI and robotics research in later years,
+      often in collaboration with academic partners. I am also deeply committed to mentoring and inclusive
+      engineering education, and previously served as engineering faculty at Cañada College.
     </p>
     <p>
-      I hold a B.S. in Mechanical Engineering from the University of Southern California (USC) and a M.S. in Aeronautics and Astronautics from Purdue University.
+      I hold a B.S. in Mechanical Engineering from the University of Southern California and an M.S. in
+      Aeronautics and Astronautics from Purdue University.
     </p>
   </section>
 
-
   <section id="research">
-    <h2>Research Interests</h2>
+    <div class="eyebrow">Research interests</div>
     <p>
-      My research focuses on the design of algorithms for modeling, analyzing, and controlling complex interactions in societal-scale 
-      multi-agent systems. I develop frameworks for coordination and decision-making in cyber-physical systems where physical dynamics, 
-      communication constraints, uncertainty, and strategic interactions are tightly coupled.
+      I design algorithms for modeling, analyzing, and controlling complex interactions in societal-scale
+      multi-agent systems. I develop frameworks for coordination and decision-making in cyber-physical systems
+      where physical dynamics, communication constraints, uncertainty, and strategic interactions are tightly coupled.
     </p>
     <p>
-      I emphasize modeling and simulation approaches that reflect real-world operating conditions, incorporating contextual information, uncertainty, 
-      low observability or communication among heterogeneous agents, and system-level constraints rather than idealized assumptions.
+      I emphasize modeling and simulation that reflect real-world operating conditions — contextual information,
+      uncertainty, low observability and limited communication among heterogeneous agents, and system-level
+      constraints — rather than idealized assumptions.
     </p>
     <p>
-      My interests lie in humanitarian and safety-critical applications such as disaster response, transportation, resource allocation, and planning for underserved populations. 
-      This spans in domains such as autonomous aerial mobility, human-robot interaction, and multi-robot systems.
-
+      My interests lie in humanitarian and safety-critical applications such as disaster response, transportation,
+      resource allocation, and planning for underserved populations, spanning autonomous aerial mobility,
+      human–robot interaction, and multi-robot systems.
     </p>
     <p>
-      Methods I study include learning-based approaches (AI) with control theory, optimization, and game-theory, mechanism design. However, I emphasize selecting methods that 
-      are appropriate to the system and task at hand. My goal is to design systems that are effective, reliable, and principled, with safety, interpretability, and performance guarantees where possible.
+      I combine learning-based approaches with control theory, optimization, game theory, and
+      mechanism design, always selecting the method appropriate to the system and task at hand. A growing thread
+      of my work studies foundation models in multi-agent roles: as generative agents simulating sequential human
+      decision-making, and as high-level coordinators for heterogeneous robot teams. My goal is to design systems
+      that are effective, reliable, and principled, with safety, interpretability, and performance guarantees
+      where possible.
     </p>
   </section>
 
   <section id="news">
-    <h2>News</h2>
-    <ul> 
-      <li>May 25-29 - I'll be presenting my work on "Decentralized Ergodic Coverage Control in Unknown Time-Varying Environments" at the International Conference on Autonomous Agents and Multiagent Systems (AAMAS) in Paphos, Cyprus</li>
-      <p></p>
-      <li>April 23-27 -  I'll be presenting my work on "Hierarchical Generative Agents For Simulating Sequential Human Behavior" at the International Conference on Learning Representations (ICLR) in Rio de Janerio, Brazil</li>
-      <p></p>
-
-      <li>Oct 2025 - Presented my work on "Coordinated Autonomous Drones for Human-Centered Fire Evacuation in Partially Observable Urban Environments" at the IEEE Global Humanitarian Technology Conference (GHTC) (AAMAS) in Boulder, Colorado</li>      
+    <div class="eyebrow">News</div>
+    <ul class="news">
+      <li>
+        <time datetime="2026-05">May 2026</time>
+        <span>Presented <em>“Decentralized Ergodic Coverage Control in Unknown Time-Varying Environments”</em>
+        at the AAMAS 2026 Autonomous Robots and Multirobot Systems (ARMS) Workshop in Paphos, Cyprus (oral).</span>
+      </li>
+      <li>
+        <time datetime="2026-04">Apr 2026</time>
+        <span>Presented <em>“Hierarchical Generative Agents for Simulating Sequential Human Behavior”</em>
+        at the ICLR 2026 Workshop on Multi-Agent Learning in the Era of Generative AI in Rio de Janeiro, Brazil (poster).</span>
+      </li>
+      <li>
+        <time datetime="2026-01">Spring 2026</time>
+        <span>Graduate Student Instructor for EE 290: Learning-Enabled Multi-Agent Systems at UC Berkeley.</span>
+      </li>
+      <li>
+        <time datetime="2025-10">Oct 2025</time>
+        <span>Presented <em>“Coordinated Autonomous Drones for Human-Centered Fire Evacuation in Partially
+        Observable Urban Environments”</em> at the IEEE Global Humanitarian Technology Conference (GHTC) in Boulder, Colorado.</span>
+      </li>
     </ul>
-      </section>
+  </section>
 
-    <section id="publications">
-      <h2>Publications</h2>
-      <p>For an updated list, please see my <a href="https://scholar.google.com/citations?user=jHEiHecAAAAJ&hl=en">Google Scholar.</a></p>
-    </section>
+  <section id="publications">
+    <div class="eyebrow">Publications</div>
+    <p class="pub-note">* indicates equal contribution. For an updated list, see my
+      <a href="https://scholar.google.com/citations?user=jHEiHecAAAAJ&hl=en">Google Scholar</a>.</p>
 
-    <section id="teaching">
-      <h2>Teaching</h2>
-      <ul>  
-        <li>Learning-enabled multi-agent systems - EL ENG 290, teaching assistant, UC Berkeley, Spring 2026</li>
-        <li>Introduction to Engineering - ENGR 100, instructor, Cañada College (San Mateo Community College District), Fall 2022, Spring 2023</li>
-        <li>Computational Methods for Engineers and Scientists - ENGR 215, instructor, Cañada College (San Mateo Community College District), Fall 2022, Spring 2023</li>
-      </ul>
-    </section>
+    <h3 class="pub-group">Journal articles</h3>
+    <div class="pub">
+      <div class="title">Privacy-Preserving Mechanisms for Coordinating Airspace Usage in Advanced Air Mobility</div>
+      <div class="authors">C. Maheshwari*, <strong>M. G. Mendoza*</strong>, V. M. Tuck*, P.-Y. Su, V. L. Qin, S. A. Seshia, H. Balakrishnan, S. Sastry</div>
+      <div class="venue"><em>ACM Journal of Autonomous Transportation Systems</em>, 2025</div>
+      <div class="tags"><a class="tag" href="https://dl.acm.org/doi/10.1145/3732290">paper</a></div>
+    </div>
 
-    <section id="experience">
-      <h2>Professional Experience</h2>
-      <p>Research Scientist, Lockheed Martin, 2017-2022</p>
-      <p>Engineering Faculty, Cañada College, 2022-2023</p>
-    </section>
+    <h3 class="pub-group">Conference papers</h3>
+    <div class="pub">
+      <div class="title">Dynamic Multi-Robot Task Allocation under Uncertainty and Communication Constraints: A Game-Theoretic Approach</div>
+      <div class="authors"><strong>M. G. Mendoza*</strong>, P.-Y. Su*, B. L. Ferguson, S. S. Sastry</div>
+      <div class="venue"><em>Under review</em>, 2026</div>
+      <div class="tags"><a class="tag" href="https://arxiv.org/abs/2604.11954">arXiv</a></div>
+    </div>
+    <div class="pub">
+      <div class="title">Coordinated Autonomous Drones for Human-Centered Fire Evacuation in Partially Observable Urban Environments</div>
+      <div class="authors"><strong>M. G. Mendoza</strong>, A. Kalanther, D. Bostwick, E. Stephan, C. Maheshwari, S. Sastry</div>
+      <div class="venue"><em>IEEE Global Humanitarian Technology Conference (GHTC)</em>, 2025</div>
+      <div class="tags"><a class="tag" href="https://ieeexplore.ieee.org/abstract/document/11266444">paper</a></div>
+    </div>
+    <div class="pub">
+      <div class="title">Resolving Conflicting Constraints in Multi-Agent Reinforcement Learning with Layered Safety</div>
+      <div class="authors">J. Choi, J. Aloor, J. Li, <strong>M. G. Mendoza</strong>, C. Tomlin, H. Balakrishnan</div>
+      <div class="venue"><em>Robotics: Science and Systems (RSS)</em>, 2025</div>
+      <div class="tags"><a class="tag" href="https://arxiv.org/abs/2505.02293">arXiv</a></div>
+    </div>
 
-    <section id="projects">
-      <h2>Ongoing Projects</h2>
-      <p> More information coming soon, website under construction, please look at my CV for more information</p>
-    </section>
+    <h3 class="pub-group">Workshop papers</h3>
+    <div class="pub">
+      <div class="title">Hierarchical Generative Agents for Simulating Sequential Human Behavior</div>
+      <div class="authors"><strong>M. G. Mendoza*</strong>, L. Waldburger*, J. Lee, S. Sastry</div>
+      <div class="venue"><em>ICLR Workshop on Multi-Agent Learning in the Era of Generative AI</em>, 2026 (poster)</div>
+      <div class="tags"><a class="tag" href="https://openreview.net/forum?id=MzeMSprSO5">OpenReview</a></div>
+    </div>
+    <div class="pub">
+      <div class="title">Decentralized Ergodic Coverage Control in Unknown Time-Varying Environments</div>
+      <div class="authors"><strong>M. G. Mendoza</strong>, V. Tuck, C. Maheshwari, S. Sastry</div>
+      <div class="venue"><em>AAMAS Autonomous Robots and Multirobot Systems (ARMS) Workshop</em>, 2026 (oral)</div>
+      <div class="tags"><a class="tag" href="https://arxiv.org/abs/2604.04280">arXiv</a></div>
+    </div>
+  </section>
 
-    
-    <!-- <section id="projects">
-      <h2>Ongoing Projects</h2>
-      <p> More information coming soon...</p>
-      <ul>
-        <li>Decentralization of Dynamic Task Assignment of Multi-Agent Systems with Temporal Constraints and Uncertainty</li>
-        <li>Decentralized Ergodic Coverage Control in Unknown Time-Varying Environments</li>
-        <li>Simulating Sequential Human Decision-Making During Disasters in Dynamic Environments</li>
-      </ul>
-    </section>
+  <section id="talks">
+    <div class="eyebrow">Invited talks &amp; presentations</div>
+    <ul class="rows">
+      <li>
+        <span class="when">May 2026</span>
+        <span class="what"><strong>AAMAS 2026</strong>, Paphos, Cyprus
+          <div class="sub">“Decentralized Ergodic Coverage Control in Unknown Time-Varying Environments”</div></span>
+      </li>
+      <li>
+        <span class="when">Spring 2026</span>
+        <span class="what"><strong>EE 290: Learning-Enabled Multi-Agent Systems</strong>, UC Berkeley (guest lecture)
+          <div class="sub">“RESCUE: Resilient Exploration and Search Coordination of UAVs in Unknown Environments”</div></span>
+      </li>
+      <li>
+        <span class="when">2025–2026</span>
+        <span class="what"><strong>DARPA ANSR Program Meetings</strong>
+          <div class="sub">“Coordinated Autonomous Drones for Human-Centered Fire Evacuation in Partially Observable Urban Environments”</div></span>
+      </li>
+      <li>
+        <span class="when">Oct 2025</span>
+        <span class="what"><strong>IEEE GHTC 2025</strong>, Boulder, Colorado
+          <div class="sub">“Coordinated Autonomous Drones for Human-Centered Fire Evacuation in Partially Observable Urban Environments”</div></span>
+      </li>
+      <li>
+        <span class="when">Sep 2024</span>
+        <span class="what"><strong>Encuentro de Mujeres Latinas en STEM del Área de la Bahía</strong> (invited speaker)
+          <div class="sub">“Un renacer científico en el extranjero: una travesía entre lo profesional, la readaptación cultural y el proceso de autoconocimiento”</div></span>
+      </li>
+    </ul>
+  </section>
 
-    <section id="talks">
-      <h2>Talks</h2>
-      <p> RESCUE: Resilient Exploration and Search Coordination of UAVs in Unknown Environments (Guest Lecture, LEMAS Spring 2026)</p>
-      <p>"Coordinated Autonomous Drones for Human-Centered Fire Evacuation in Partially Observable Urban Environments", IEEE GHTC 2025</p>
-      <p> More information coming soon, website in construction...</p>
-    </section> -->
+  <section id="teaching">
+    <div class="eyebrow">Teaching</div>
+    <ul class="rows">
+      <li>
+        <span class="when">Spring 2026</span>
+        <span class="what"><strong>EE 290 — Learning-Enabled Multi-Agent Systems</strong>
+          <div class="sub">Graduate Student Instructor, UC Berkeley</div></span>
+      </li>
+      <li>
+        <span class="when">2022–2023</span>
+        <span class="what"><strong>ENGR 100 — Introduction to Engineering</strong>
+          <div class="sub">Instructor, Cañada College (San Mateo Community College District)</div></span>
+      </li>
+      <li>
+        <span class="when">2022–2023</span>
+        <span class="what"><strong>ENGR 215 — Computational Methods for Engineers and Scientists</strong>
+          <div class="sub">Instructor, Cañada College (San Mateo Community College District)</div></span>
+      </li>
+    </ul>
+  </section>
 
-  </main>
-</div>
+  <section id="experience">
+    <div class="eyebrow">Professional experience</div>
+    <ul class="rows">
+      <li>
+        <span class="when">2022–2023</span>
+        <span class="what"><strong>Engineering Faculty</strong> · Cañada College</span>
+      </li>
+      <li>
+        <span class="when">2017–2022</span>
+        <span class="what"><strong>Research Scientist</strong> · Lockheed Martin
+          <div class="sub">AI/ML and robotics research; hypersonic systems; multi-university collaborations</div></span>
+      </li>
+    </ul>
+  </section>
+
+  <section id="projects">
+    <div class="eyebrow">Ongoing projects</div>
+    <ul class="rows">
+      <li>
+        <span class="when">New</span>
+        <span class="what"><strong>Foundation models as coordinators for heterogeneous robot teams</strong>
+          <div class="sub">Studying how LLMs can serve as high-level coordinators for heterogeneous multi-robot systems operating under uncertainty</div></span>
+      </li>
+      <li>
+        <span class="when">RESCUE</span>
+        <span class="what"><strong>Resilient Exploration and Search Coordination of UAVs in Unknown Environments</strong>
+          <div class="sub">Multi-UAV coordination to assist humans and emergency responders during disasters</div></span>
+      </li>
+      <li>
+        <span class="when">Theory</span>
+        <span class="what"><strong>Decentralized ergodic coverage control in unknown time-varying environments</strong></span>
+      </li>
+      <li>
+        <span class="when">Allocation</span>
+        <span class="what"><strong>Decentralized dynamic task assignment with temporal constraints and uncertainty</strong></span>
+      </li>
+      <li>
+        <span class="when">Behavior</span>
+        <span class="what"><strong>Simulating sequential human decision-making during disasters in dynamic environments</strong></span>
+      </li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  <span>© 2026 María Gabriela Mendoza</span>
+  <span>Berkeley, California</span>
+</footer>
+
 </body>
 </html>
