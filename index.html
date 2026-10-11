@@ -14,6 +14,7 @@
     --teal-deep: #143E3B;
     --teal-tint: #EAF1EF;
     --amber: #B07A1E;
+    --amber-tint: #F6EEDD;
     --paper: #FBFBF8;
     --ink: #1D2422;
     --ink-soft: #4C5854;
@@ -128,7 +129,14 @@
   section p + p { margin-top: 0.9rem; }
 
   /* News */
+  .news-scroll {
+    max-height: 22rem; overflow-y: auto; padding-right: 0.5rem;
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    scrollbar-width: thin; scrollbar-color: var(--line) transparent;
+  }
+  .news-scroll:focus-visible { outline: 2px solid var(--amber); outline-offset: 4px; }
   .news { list-style: none; }
+  .news li:last-child { border-bottom: none; }
   .news li {
     display: grid; grid-template-columns: 6.2rem 1fr; gap: 1rem;
     padding: 0.65rem 0; border-bottom: 1px dashed var(--line);
@@ -136,6 +144,11 @@
   .news time {
     font-family: "IBM Plex Mono", monospace; font-size: 0.78rem;
     color: var(--ink-soft); padding-top: 0.2rem;
+  }
+  .badge {
+    display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 0.68rem;
+    background: var(--amber-tint); color: #7A5410; border-radius: 3px;
+    padding: 0.08rem 0.4rem; margin-right: 0.35rem; vertical-align: 0.08em;
   }
 
   /* Publications */
@@ -145,6 +158,7 @@
   .pub .authors { color: var(--ink-soft); font-size: 0.97rem; }
   .pub .venue { font-size: 0.92rem; margin-top: 0.15rem; }
   .pub .venue em { color: var(--teal-deep); }
+  .pub .award { font-size: 0.9rem; color: #7A5410; margin-top: 0.15rem; }
   .pub .tags { margin-top: 0.35rem; display: flex; gap: 0.4rem; flex-wrap: wrap; }
   .tag {
     font-family: "IBM Plex Mono", monospace; font-size: 0.68rem;
@@ -158,7 +172,7 @@
     color: var(--teal-deep); margin: 1.4rem 0 0.5rem;
   }
 
-  /* Simple definition-style rows (teaching, talks, experience) */
+  /* Simple definition-style rows (teaching, talks, experience, leadership) */
   .rows { list-style: none; }
   .rows li {
     display: grid; grid-template-columns: 6.2rem 1fr; gap: 1rem;
@@ -193,7 +207,7 @@
     <a href="#publications">Publications</a>
     <a href="#talks">Talks</a>
     <a href="#teaching">Teaching</a>
-    <a href="#projects">Projects</a>
+    <a href="#leadership">Leadership</a>
   </div>
 </nav>
 
@@ -237,58 +251,53 @@
   <section id="about">
     <div class="eyebrow">About</div>
     <p>
-      I am a Ph.D. candidate in Mechanical Engineering at UC Berkeley, where I am fortunate to be advised by
-      <a href="https://scholar.google.com/citations?hl=en&user=KgZxzjsAAAAJ&view_op=list_works&sortby=pubdate">Prof. Shankar Sastry</a>
-      and mentored by <a href="https://chinmaheshwari.github.io/chinmay.maheshwari/">Prof. Chinmay Maheshwari</a>
-      and Dr. Victoria Tuck (postdoctoral researcher, UPenn).
+      I am a Ph.D. candidate in Mechanical Engineering at UC Berkeley, advised by <a href="https://people.eecs.berkeley.edu/~sastry/">Prof. Shankar Sastry</a>.
     </p>
     <p>
-      My research focuses on the design and control of multi-agent systems operating in highly uncertain and
-      dynamic environments, with applications in Advanced Air Mobility, humanitarian robotics, human behavior modeling, 
-      and cyberphysical systems.
-    </p>
-    <p>
-      Before Berkeley, I spent five years as a Research Scientist at Lockheed Martin, contributing to projects
-      ranging from hypersonic aerothermal design early in my career to AI and robotics research in later years,
-      often in collaboration with academic partners. I am also deeply committed to mentoring and inclusive
-      engineering education, and previously served as engineering faculty at Cañada College.
-    </p>
-    <p>
-      I hold a B.S. in Mechanical Engineering from the University of Southern California and an M.S. in
-      Aeronautics and Astronautics from Purdue University.
+      Before UC Berkeley, I spent five years as a Research Scientist at Lockheed Martin, moving from hypersonic
+      aerothermal design to AI and robotics research, and taught engineering at Cañada College. I hold a B.S. in
+      Mechanical Engineering from the University of Southern California and an M.S. in Aeronautics and Astronautics from Purdue.
     </p>
   </section>
 
   <section id="research">
     <div class="eyebrow">Research interests</div>
     <p>
-      I design algorithms for modeling, analyzing, and controlling complex interactions in societal-scale
-      multi-agent systems. I develop frameworks for coordination and decision-making in cyber-physical systems
-      where physical dynamics, communication constraints, uncertainty, and strategic interactions are tightly coupled.
+      My research develops algorithmic frameworks for multi-agent cyber-physical systems operating under
+      uncertainty in complex, dynamic environments. I combine learning-based methods with control theory,
+      optimization, game theory, and mechanism design. I am particularly interested in the safety and alignment
+      of multi-agent intelligent systems and their interactions, for problems requiring efficient, sustained
+      coordination and incentive design among self-interested agents. Applications of my work include
+      next-generation air mobility and multi-robot systems for disaster response.
     </p>
+
     <p>
-      I emphasize modeling and simulation that reflect real-world operating conditions: time-varying, unknown environments,
-      uncertainty, low observability and limited communication among heterogeneous agents, and system-level
-      constraints, rather than idealized assumptions.
-    </p>
-    <p>
-      My interests lie in humanitarian and safety-critical applications such as disaster response, transportation,
-      resource allocation, and planning for underserved populations, spanning autonomous aerial mobility,
-      rescue robotics, and multi-robot systems.
-    </p>
-    <p>
-      I combine learning-based approaches with control theory, optimization, game theory, and
-      mechanism design, always selecting the method appropriate to the system and task at hand. A growing thread
-      of my work studies foundation models in multi-agent roles: as generative agents simulating sequential human
-      decision-making, and as high-level coordinators for heterogeneous robot teams. My goal is to design systems
-      that are effective, reliable, and principled, with safety, interpretability, and performance guarantees
-      where possible.
+      I co-organize the <a href="https://sites.google.com/berkeley.edu/lemas-seminar">Berkeley–Hopkins Seminar Series on Learning-Enabled Multi-Agent Systems (LEMAS)</a>
+      and its weekly study group.
     </p>
   </section>
 
   <section id="news">
     <div class="eyebrow">News</div>
+    <div class="news-scroll" tabindex="0" aria-label="News (scrollable)">
     <ul class="news">
+      <li>
+        <time datetime="2026-12">Dec 17 2026</time>
+        <span><span class="badge">Upcoming</span>Presenting <em>“Dynamic Multi-Robot Task Allocation under Uncertainty
+        and Communication Constraints: A Game-Theoretic Approach”</em> at IEEE CDC 2026 in Honolulu, Hawaiʻi.</span>
+      </li>
+      <li>
+        <time datetime="2026-11">Nov 1 2026</time>
+        <span><span class="badge">Upcoming</span>Presenting <em>“Privacy-Preserving Mechanisms for Coordinating
+        Airspace Usage in Advanced Air Mobility”</em> at the INFORMS Annual Meeting.</span>
+      </li>
+      <li>
+        <time datetime="2026-10">Oct 2026</time>
+        <span>Our poster <em>“Resilient Decentralized Ergodic Coverage for Scalable Multi-Robot Systems in Unknown
+        Time-Varying Environments”</em> won the <strong>Runner-Up Best Poster Award</strong> at the IROS 2026
+        Humanitarian Assistance and Disaster Response (HADR) Workshop. Presented by Dr. Victoria Tuck.
+        <a href="IROS_Resilient_Dec_Ergodic_Search_TimeVarying_Vic.pdf">Poster (PDF)</a></span>
+      </li>
       <li>
         <time datetime="2026-05">May 2026</time>
         <span>Presented <em>“Decentralized Ergodic Coverage Control in Unknown Time-Varying Environments”</em>
@@ -309,12 +318,40 @@
         Observable Urban Environments”</em> at the IEEE Global Humanitarian Technology Conference (GHTC) in Boulder, Colorado.</span>
       </li>
     </ul>
+    </div>
   </section>
 
   <section id="publications">
     <div class="eyebrow">Publications</div>
     <p class="pub-note">* indicates equal contribution. For an updated list, see my
       <a href="https://scholar.google.com/citations?user=jHEiHecAAAAJ&hl=en">Google Scholar</a>.</p>
+
+    <h3 class="pub-group">Under review</h3>
+    <div class="pub">
+      <div class="title">Persistent LLM Orchestration of Heterogeneous Robot Teams via Partial Delegation to Multi-Agent Protocols</div>
+      <div class="authors"><strong>M. G. Mendoza*</strong>, V. M. Tuck*, Z. Ravichandran, S. Sastry, G. J. Pappas</div>
+      <div class="venue"><em>Under review</em>, 2026</div>
+      <div class="tags">
+        <a class="tag" href="#">arXiv</a><!-- add arXiv link -->
+        <a class="tag" href="https://drive.google.com/file/d/1bqJ-_G6-LC616TAHUAPNEKtUOaajiNtB/view?usp=sharing">video demo</a>
+      </div>
+    </div>
+    <div class="pub">
+      <div class="title">Dynamic Auction Mechanisms in a Closed-Credit Economy: Sequential Slot Reallocation in Air Traffic Management</div>
+      <div class="authors">J. Kim, P.-Y. Su, <strong>M. G. Mendoza</strong>, V. M. Tuck, C. Maheshwari, S. S. Sastry</div>
+      <div class="venue"><em>Under review</em>, 2026</div>
+    </div>
+
+    <div class="pub">
+      <div class="title">Resilient Decentralized Ergodic Coverage for Scalable Multi-Robot Systems in Unknown Time-Varying Environments</div>
+      <div class="authors"><strong>M. G. Mendoza</strong>, V. M. Tuck, C. Maheshwari, S. Sastry</div><!-- verify author list -->
+      <div class="venue"><em>journal under review</em>, 2026</div>
+      <div class="award">Runner-Up Best Poster Award, IROS 2026 HADR Workshop</div>
+      <div class="tags">
+        <a class="tag" href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=jHEiHecAAAAJ&citation_for_view=jHEiHecAAAAJ:zYLM7Y9cAGgC">paper</a>
+        <a class="tag" href="Mendoza_IROS2026_HADR_poster.pdf">poster</a>
+      </div>
+    </div>
 
     <h3 class="pub-group">Journal articles</h3>
     <div class="pub">
@@ -328,7 +365,7 @@
     <div class="pub">
       <div class="title">Dynamic Multi-Robot Task Allocation under Uncertainty and Communication Constraints: A Game-Theoretic Approach</div>
       <div class="authors"><strong>M. G. Mendoza*</strong>, P.-Y. Su*, B. L. Ferguson, S. S. Sastry</div>
-      <div class="venue"><em>Under review</em>, 2026</div>
+      <div class="venue"><em>IEEE Conference on Decision and Control (CDC)</em>, 2026 (to appear)</div>
       <div class="tags"><a class="tag" href="https://arxiv.org/abs/2604.11954">arXiv</a></div>
     </div>
     <div class="pub">
@@ -362,6 +399,16 @@
   <section id="talks">
     <div class="eyebrow">Invited talks &amp; presentations</div>
     <ul class="rows">
+      <li>
+        <span class="when">Dec 17 2026</span>
+        <span class="what"><strong>IEEE Controls and Decision Conference 2026</strong>, Honolulu, Hawaiʻi (upcoming)
+          <div class="sub">“Dynamic Multi-Robot Task Allocation under Uncertainty and Communication Constraints: A Game-Theoretic Approach”</div></span>
+      </li>
+      <li>
+        <span class="when">Nov 1 2026</span>
+        <span class="what"><strong>INFORMS Annual Meeting 2026</strong> (upcoming)
+          <div class="sub">“Privacy-Preserving Mechanisms for Coordinating Airspace Usage in Advanced Air Mobility”</div></span>
+      </li>
       <li>
         <span class="when">May 2026</span>
         <span class="what"><strong>AAMAS 2026</strong>, Paphos, Cyprus
@@ -426,30 +473,35 @@
     </ul>
   </section>
 
-  <section id="projects">
-    <div class="eyebrow">Ongoing projects</div>
+  <section id="leadership">
+    <div class="eyebrow">Leadership &amp; mentoring</div>
     <ul class="rows">
       <li>
-        <span class="when">New</span>
-        <span class="what"><strong>Foundation models as coordinators for heterogeneous robot teams</strong>
-          <div class="sub">Studying how LLMs can serve as high-level coordinators for heterogeneous multi-robot systems operating under uncertainty</div></span>
+        <span class="when">2026–</span>
+        <span class="what"><strong><a href="https://sites.google.com/berkeley.edu/lemas-seminar">Berkeley–Hopkins LEMAS Seminar Series</a></strong>
+          <div class="sub">Co-organizer · Weekly seminar on learning and incentive design in multi-agent systems · Fridays, 10 a.m. (hybrid)</div></span>
       </li>
       <li>
-        <span class="when">RESCUE</span>
-        <span class="what"><strong>Resilient Exploration and Search Coordination of UAVs in Unknown Environments</strong>
-          <div class="sub">Multi-UAV coordination to assist humans and emergency responders during disasters</div></span>
+        <span class="when">2026–</span>
+        <span class="what"><strong><a href="https://sites.google.com/berkeley.edu/lemas-seminar">LEMAS Study Group</a></strong>, UC Berkeley
+          <div class="sub">Co-organizer · We meet on Mondays 9:00am at the Sutardja Dai Hall (Newton room, 7th floor) to discuss recent research 
+            on the theoretical foundations of safe and aligned agentic systems.
+          </div></span>
       </li>
       <li>
-        <span class="when">Theory</span>
-        <span class="what"><strong>Decentralized ergodic coverage control in unknown time-varying environments</strong></span>
+        <span class="when">2026–</span>
+        <span class="what"><strong>Graduate Mentor</strong>, Getting into Graduate School (GiGS), UC Berkeley
+          <div class="sub">Mentoring undergraduates applying to graduate programs</div></span>
       </li>
       <li>
-        <span class="when">Allocation</span>
-        <span class="what"><strong>Decentralized dynamic task assignment with temporal constraints and uncertainty</strong></span>
+        <span class="when">Summer 2025</span>
+        <span class="what"><strong>Graduate Mentor</strong>, Transfer-to-Excellence (TTE) Research Program, UC Berkeley
+          <div class="sub">Designed and supervised research projects in robotics and AI for community college students</div></span>
       </li>
       <li>
-        <span class="when">Behavior</span>
-        <span class="what"><strong>Simulating sequential human decision-making during disasters in dynamic environments</strong></span>
+        <span class="when">2025–2026</span>
+        <span class="what"><strong>Board Member</strong>, Latino Association of Graduate Students in Engineering &amp; Science (LAGSES), UC Berkeley
+          <div class="sub">Corporate Liaison (2025); Treasurer (2026)</div></span>
       </li>
     </ul>
   </section>
